@@ -4167,79 +4167,11 @@ AddCommand("unspamsilentchat", {"nospamsilentchat", "unspamchatlogs", "nospamcha
     DisableAllCmdConnections("spamsilentchat");
     return "stopped spamming slient chat"
 end)
--- Start of Ethan's Custom Admin Commands
 
-AddCommand("f3x", {}, "Added by EthanChas", {3}, function(Caller)
-    loadstring(game:GetObjects("rbxassetid://6695644299")[1].Source)()
-   return "Given F3X Btools"
+AddCommand("advertise", {}, "advertises the script", {}, function()
+    local ChatRemote = Services.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest
+    ChatRemote.FireServer(ChatRemote, "I pee'd my pants!!", "All");
 end)
-
-AddCommand("audiologger", {"alogger"}, "Added by EthanChas", {3}, function(Caller)
-    loadstring(game:HttpGet(('https://pastebin.com/raw/GmbrsEjM'),true))()
-    return "Given Logger"
-end)
-
-
-AddCommand("remotespy", {"rs"}, "Gives you hydroxide remote spy. Added by EthanChas", {3}, function(Caller)
-local owner = "Upbolt"
-local branch = "revision"
-
-local function webImport(file)
-    return loadstring(game:HttpGetAsync(("https://raw.githubusercontent.com/%s/Hydroxide/%s/%s.lua"):format(owner, branch, file)), file .. '.lua')()
-end
-
-webImport("init")
-webImport("ui/main")
-    return "Given hydroxide remote spy!"
-end)
-
-AddCommand("teleporttool", {"tptool"}, "Gives you a Tool. by EthanChas", {3}, function(Caller)
-mouse = game.Players.LocalPlayer:GetMouse()
-tool = Instance.new("Tool")
-tool.RequiresHandle = false
-tool.Name = "Teleport Tool"
-tool.Activated:connect(function()
-local pos = mouse.Hit+Vector3.new(0,2.5,0)
-pos = CFrame.new(pos.X,pos.Y,pos.Z)
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = pos
-end)
-tool.Parent = game.Players.LocalPlayer.Backpack
-    return "Given Teleport tool!"
-end)
-
-AddCommand("unloopnobgui", {"unloopnobgui"}, "Gives you a Tool. by EthanChas", {3}, function(Caller)
-	if charPartTrigger then
-		charPartTrigger:Disconnect()
-	end
-    return "Unlooped!"
-end)
-
-AddCommand("loopnobillboardgui", {"loopnobgui"}, "Gives you a Tool. by EthanChas", {3}, function(Caller)
-	for i,v in pairs(Caller.Character:GetDescendants())do
-		if v:IsA("BillboardGui") or v:IsA("SurfaceGui") then
-			v:Destroy()
-		end
-	end
-	local function charPartAdded(part)
-		if part:IsA("BillboardGui") or part:IsA("SurfaceGui") then
-			wait()
-			part:Destroy()
-		end
-	end
-	charPartTrigger = Caller.Character.DescendantAdded:Connect(charPartAdded)
-    return "Looped!"
-end)
-
-AddCommand("nobillboardgui", {"nobgui"}, "Removes Custom name tags ETC.. by EthanChas", {3}, function(Caller)
-	for i,v in pairs(Caller.Character:GetDescendants())do
-		if v:IsA("BillboardGui") or v:IsA("SurfaceGui") then
-			v:Destroy()
-		end
-	end
-    return "Ya yeet no name"
-end)
-
--- End of Ethan's Custom Admin Commands
 
 AddCommand("joinserver", {"discord"}, "joins the fates admin discord server", {}, function()
     local Request = syn and syn.request or request
